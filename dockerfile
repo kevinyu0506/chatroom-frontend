@@ -1,4 +1,4 @@
-FROM node:10-alpine AS builder
+FROM node:alpine
 
 MAINTAINER Kevin Yu <kevinyu05062006@gmail.com>
 
