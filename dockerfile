@@ -9,13 +9,16 @@ COPY . ./
 RUN npm install && \
     npm run build
 
+EXPOSE 3000
 
-FROM nginx:alpine
+CMD ["npm", "start"]
 
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /opt/web/build /usr/share/nginx/html
-
-EXPOSE 8080
-
-CMD ["nginx", "-g", "daemon off;"]
+#FROM nginx:alpine
+#
+#COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+#COPY --from=builder /opt/web/build /usr/share/nginx/html
+#
+#EXPOSE 8080
+#
+#CMD ["nginx", "-g", "daemon off;"]
 
