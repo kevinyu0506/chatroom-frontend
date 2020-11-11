@@ -2,23 +2,19 @@ FROM node:alpine AS builder
 
 MAINTAINER Kevin Yu <kevinyu05062006@gmail.com>
 
-WORKDIR /opt/web
+WORKDIR /app
 
-COPY . ./
+COPY . /app
 
-RUN npm install && \
+RUN npm ci --loglevel verbose && \
     npm run build
 
-EXPOSE 3000
 
-CMD ["npm", "start"]
+FROM nginx:alpine
 
-#FROM nginx:alpine
-#
-#COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-#COPY --from=builder /opt/web/build /usr/share/nginx/html
-#
-#EXPOSE 8080
-#
-#CMD ["nginx", "-g", "daemon off;"]
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
 

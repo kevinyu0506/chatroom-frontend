@@ -29,7 +29,7 @@ class ChatApp extends Component {
         let person = prompt("Please enter your name", "Harry Potter");
 
         this.setState({
-            ws: webSocket('http://localhost:9000'),
+            ws: webSocket('http://localhost'),
             name: person
         })
     }
@@ -41,7 +41,7 @@ class ChatApp extends Component {
             this.isInit = true;
 
             socket.emit('setName', this.state.name);
-            
+
             // Listen on message received event
             socket.on('messageReceived', message => {
                 this.createMessage(message);
@@ -83,7 +83,7 @@ class ChatApp extends Component {
             message: current_message,
             isbotmessage: false
         };
-        
+
         this.setState( prevstate => ({
             messages: [...prevstate.messages, newElement],
             current_message: ""
