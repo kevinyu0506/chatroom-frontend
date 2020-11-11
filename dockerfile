@@ -1,15 +1,21 @@
-FROM node:alpine
+FROM node:alpine AS builder
 
 MAINTAINER Kevin Yu <kevinyu05062006@gmail.com>
 
-RUN mkdir /app
+WORKDIR /opt/web
 
-COPY . /app
+COPY . ./
 
-WORKDIR /app
+RUN npm install && \
+    npm run build
 
-RUN npm install
 
-EXPOSE 3000
+FROM nginx:alpine
 
-CMD ["npm", "start"]
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /opt/web/build /usr/share/nginx/html
+
+EXPOSE 8080
+
+CMD ["nginx", "-g", "daemon off;"]
+
