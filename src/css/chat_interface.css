@@ -5,6 +5,7 @@
   body {
     background-color: #edeff2;
     font-family: "Calibri", "Roboto", sans-serif;
+    padding: 30px;
   }
   
   .chat_window {
@@ -20,6 +21,7 @@
     background-color: #f8f8f8;
     overflow: hidden;
     height: calc(100vh - 120px);
+    margin: auto;
   }
   
   .top_menu {
