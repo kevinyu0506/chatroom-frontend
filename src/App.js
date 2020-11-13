@@ -29,7 +29,7 @@ class ChatApp extends Component {
         let person = prompt("Please enter your name", "Harry Potter");
 
         this.setState({
-            ws: webSocket('http://localhost:8080'),
+            ws: webSocket('http://localhost:80'),
             name: person
         })
     }
